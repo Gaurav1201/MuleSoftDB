@@ -2,26 +2,27 @@
 session_start() ;
 $servername = "localhost";
 $username = "root";
-$password = "hello1234";
-$dbname = "MuleSoftDB1";
+$password = "";
+$dbname = "MuleSoftDBNew";
 
 // Create connection
-$conn = new mysqli($servername, $username,$password,$dbname);
+$conn = new mysqli($servername, $username,$password);
 //Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }else {
    // echo "Error creating database: " . $conn->error;
 }
+$sql = "CREATE DATABASE MuleSoftDBNew";
+if ($conn->query($sql) === TRUE) {
+ echo "Database created successfully";
+} else {
+  echo "Error creating database: " . $conn->error;
+}
+$conn->close();
+$conn = new mysqli($servername, $username,$password,$dbname);
 
 // Create database
-//$sql = "CREATE DATABASE MuleSoftDB1";
-//if ($conn->query($sql) === TRUE) {
- // echo "Database created successfully";
-//} else {
-  //echo "Error creating database: " . $conn->error;
-//}
-
 //name, actor, actress, director, year of release
 $sql = "CREATE TABLE MOVIES2(movie_name varchar(20), actor varchar(20), actress varchar(20), year_of_release date, director varchar(20))";
 if ($conn->query($sql) === TRUE) {
